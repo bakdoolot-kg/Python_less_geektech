@@ -2,7 +2,7 @@ from random import randint
 
 
 def get_list() -> list:
-    return list(range(0, 100000000, 2))
+    return list(range(0, 1_000_000_000, 2))
 
 
 """
@@ -26,20 +26,21 @@ class Solution:
             middle = (low + high) // 2
             guess = self.userList[middle]
 
-            if guess == target:
-                print(f"Выполнено {i} шаг")
-                return print(f"True>>> {target}")
+            if guess < target:
+                print(f"Больше {guess}!")
+                low = middle + 1
+                i += 1
+
             if guess > target:
                 print(f"Меньше {guess}!")
                 high = middle - 1
                 i += 1
             else:
-                print(f"Больше {guess}!")
-                low = middle + 1
-                i += 1
-        return None
+                print(f"Выполнено {i} шаг")
+                return print(f"True>>> {target}")
+        return -1
 
 
 target = Solution(get_list())
-target.find_target(randint(1, 1000000))
-# target.find_target(1000000)
+# target.find_target(randint(1, 1000000))
+target.find_target(10000000000123)
