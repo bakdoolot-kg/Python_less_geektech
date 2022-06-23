@@ -127,4 +127,4 @@ def register_handlers_fsm(dp: Dispatcher):
     dp.register_message_handler(load_age, state=FSMAdmin.age)
     dp.register_message_handler(load_region, state=FSMAdmin.region)
     dp.register_message_handler(delete_data, commands=['del'])
-    dp.register_message_handler(complete_delete, lambda call: call.data and call.data.startswith("delete "))
+    # dp.register_message_handler(complete_delete, lambda call: call.data and call.data.startswith("delete "))
