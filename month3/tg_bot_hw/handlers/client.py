@@ -3,6 +3,7 @@ from aiogram.types import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 
 from config import bot
 from keyboards.client_kb import start_markup
+from parser import movies, animes, cartoons
 
 
 async def command_start(message: types.Message):
@@ -51,8 +52,53 @@ async def pin_message(message: types.Message):
         await bot.pin_chat_message(message.chat.id, message.message_id)
 
 
+async def parser_movies(message: types.Message):
+    data = movies.parser()
+    for movie in data:
+        desc = movie['desc'].split(", ")
+        await bot.send_message(
+            message.from_user.id,
+            f"Название: {movie['title']}\n"
+            f"Год: #{desc[0]}\n"
+            f"Страна: {'' if len(desc) == 2 else f'#{desc[1]}'}\n"
+            f"Жанр: #{desc[1] if len(desc) == 2 else desc[2]}\n\n"
+            f"{movie['link']}"
+        )
+
+
+async def parser_anime(message: types.Message):
+    data = animes.parser()
+    for anime in data:
+        desc = anime['desc'].split(", ")
+        await bot.send_message(
+            message.from_user.id,
+            f"Название: {anime['title']}\n"
+            f"Год: #{desc[0]}\n"
+            f"Страна: {'' if len(desc) == 2 else f'#{desc[1]}'}\n"
+            f"Жанр: #{desc[1] if len(desc) == 2 else desc[2]}\n\n"
+            f"{anime['link']}"
+        )
+
+
+async def parser_cartoons(message: types.Message):
+    data = cartoons.parser()
+    for cartoon in data:
+        desc = cartoon['desc'].split(", ")
+        await bot.send_message(
+            message.from_user.id,
+            f"Название: {cartoon['title']}\n"
+            f"Год: #{desc[0]}\n"
+            f"Страна: {'' if len(desc) == 2 else f'#{desc[1]}'}\n"
+            f"Жанр: #{desc[1] if len(desc) == 2 else desc[2]}\n\n"
+            f"{cartoon['link']}"
+        )
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(command_mem, commands=['mem'])
     dp.register_message_handler(pin_message, commands=['pin'], commands_prefix="!/")
+    dp.register_message_handler(parser_movies, commands=['film'])
+    dp.register_message_handler(parser_anime, commands=['anime'])
+    dp.register_message_handler(parser_cartoons, commands=['cartoons'])

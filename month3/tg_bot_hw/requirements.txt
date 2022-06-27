@@ -14,3 +14,7 @@ pytz==2022.1
 requests==2.6.0
 unique-id==1.0.1
 yarl==1.7.2
+
+bs4~=0.0.1
+beautifulsoup4~=4.11.1
+aioschedule~=0.5.2
