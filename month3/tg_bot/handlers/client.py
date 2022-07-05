@@ -54,7 +54,7 @@ async def parser_movies(message: types.Message):
             f"Название: {movie['title']}\n"
             f"Год: #{desc[0]}\n"
             f"Страна: #{desc[1]}\n"
-            f"Жанр: #{desc[2]}\n\n"
+            # f"Жанр: #{desc[2] if desc[2] else 'нету'}\n\n"
             f"{movie['link']}"
         )
 
