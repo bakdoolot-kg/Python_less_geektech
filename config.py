@@ -8,3 +8,4 @@ TOKEN = config("TOKEN")
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
 ADMIN = [608718247]
+URL = "https://baku18-1.herokuapp.com/"
