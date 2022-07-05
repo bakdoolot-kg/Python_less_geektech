@@ -40,4 +40,3 @@ def parser():
     else:
         raise Exception("Error in parser!")
 
-print(parser())
