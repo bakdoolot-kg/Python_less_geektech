@@ -55,7 +55,7 @@ async def load_description(message: types.Message, state: FSMContext):
 async def load_price(message: types.Message, state: FSMContext):
     try:
         async with state.proxy() as data:
-            data["price"] = message.text
+            data["price"] = int(message.text, base=3)
             await bot.send_photo(message.from_user.id,
                                  data['photo'],
                                  caption=f"Название: {data['name']}\n"
