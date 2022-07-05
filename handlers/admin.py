@@ -41,7 +41,19 @@ async def get_all_users(message: types.Message):
         await message.answer("Ты не мой БОСС!!!")
 
 
+async def mailing_for_users(message: types.Message):
+    if message.from_user.id in ADMIN:
+        all_users = psql_db.cursor.execute("SELECT id FROM users")
+        result = psql_db.cursor.fetchall()
+        print(result)
+        for id in result:
+            await bot.send_message(id[0], message.text[4:])
+    else:
+        await message.answer("Ты не мой БОСС!!!")
+
+
 def register_handlers_admin(dp: Dispatcher):
     dp.register_message_handler(ban, commands=["ban"], commands_prefix="!/")
     dp.register_message_handler(mailing, commands=["R"])
+    dp.register_message_handler(mailing_for_users, commands=["R2"])
     dp.register_message_handler(get_all_users, commands=["users"])
